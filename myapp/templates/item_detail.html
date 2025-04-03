@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header, footer {
+            background-color: #0078D7;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #0078D7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            background-color: #0053a6;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+
+    <header>
+        <h2>{{ object.name }}</h2>
+    </header>
+    <div class="container">
+        <h2>{{ object.rocnik }}</h2>
+        <p>{{ object.description }}</p>
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'item_update' object.pk %}" class="btn btn-warning">Upravit</a>
+            <a href="{% url 'item_delete' object.pk %}" class="btn btn-danger">Smazat</a>
+        {% endif %}
+        <a href="{% url 'item_list' %}" class="btn btn-secondary">Zpět</a>
+    </div>
+    <footer>
+        <p>Historie vítězů turnaje &copy; 2025</p>
+    </footer>
+{% endblock %}

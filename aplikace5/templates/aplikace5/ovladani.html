@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ovládání</title>
+</head>
+<body>
+    <h1>Ovládání</h1>
+
+    <!-- Formulář pro zadání počtu účastníků -->
+    <form method="post">
+        {% csrf_token %}
+        <label for="pocet_ucastniku">Zadej počet účastníků (3–50):</label>
+        <input type="number" id="pocet_ucastniku" name="pocet_ucastniku" min="3" max="50" value="{{ pocet_poli }}" required>
+        <button type="submit">Odeslat</button>
+    </form>
+
+    {% if range_pocet_poli %}
+    <!-- Dynamické zobrazení polí pro zadání jmen účastníků -->
+    <h2>Zadejte jména účastníků:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for i in range_pocet_poli %}
+            <label for="jmeno_{{ i }}">Účastník {{ i|add:1 }}:</label>
+            <input type="text" id="jmeno_{{ i }}" name="jmeno_{{ i }}" required>
+            <br>
+        {% endfor %}
+        <button type="submit">Odeslat2</button>
+    </form>
+    {% endif %}
+
+    {% if rozpis_zapasu %}
+    <!-- Rozpis zápasů -->
+    <h2>Rozpis zápasů</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table border="1">
+            <tr>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Score</th>
+                <th>Score Write</th>
+            </tr>
+            {% for zapas in rozpis_zapasu %}
+            <tr>
+                <td>{{ zapas.team1 }}</td>
+                <td>{{ zapas.team2 }}</td>
+                <td>{{ zapas.score1 }} : {{ zapas.score2 }}</td>
+                <td>
+                    <input type="number" name="score_write1_{{ forloop.counter }}" min="-1" max="1000" value="{{ zapas.score_write1 }}">
+                    :
+                    <input type="number" name="score_write2_{{ forloop.counter }}" min="-1" max="1000" value="{{ zapas.score_write2 }}">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" name="odeslat3">Odeslat3</button>
+    </form>
+    {% endif %}
+
+    {% if krizova_tabulka %}
+    <!-- Křížová tabulka -->
+    <h2>Křížová tabulka</h2>
+    <table border="1">
+        <tr>
+            <th>Jméno</th>
+            {% for jmeno in jmena %}
+                <th>{{ jmeno }}</th>
+            {% endfor %}
+            <th>Celkove skore</th> <!-- Přidán nový sloupec -->
+            <th>Body</th>
+            <th>Pořadí</th>
+        </tr>
+        {% for radek in krizova_tabulka %}
+        <tr>
+            <td>{{ radek.jmeno }}</td>
+            {% for policko in radek.radek %}
+                <td>{{ policko }}</td> <!-- Výsledky zápasů -->
+            {% endfor %}
+            <td>{{ radek.score }}</td> <!-- Zobrazení celkového skóre -->
+            <td>{{ radek.body }}</td> <!-- Zachování sloupce Body -->
+            <td>{{ radek.poradi }}</td> <!-- Zachování sloupce Pořadí -->
+        </tr>
+        {% endfor %}
+    </table>
+    
+    
+    {% endif %}
+</body>
+</html>

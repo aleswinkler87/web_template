@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object|yesno:"Edit Item,Nový ročník" }}{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header, footer {
+            background-color: #0078D7;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #0078D7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: #0053a6;
+        }
+    </style>
+
+    <header>
+        <h2>{{ object|yesno:"Edit Item,Nový ročník" }}</h2>
+    </header>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Uložit</button>
+        </form>
+        <a href="{% url 'item_list' %}">Zpět</a>
+    </div>
+    <footer>
+        <p>Historie vítězů turnaje &copy; 2025</p>
+    </footer>
+{% endblock %}

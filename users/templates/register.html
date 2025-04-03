@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Registrace{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header, footer {
+            background-color: #0078D7;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            background-color: #0078D7;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0053a6;
+        }
+    </style>
+
+    <header>
+        <h2>Registrace</h2>
+    </header>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Registrovat</button>
+        </form>
+    </div>
+    <footer>
+        <p>Register &copy; 2025</p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rozpis výsledků</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header, footer {
+            background-color: #0078D7;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #0078D7;
+            color: white;
+            font-size: 16px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #0078D7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #0053a6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rozpis výsledků</h1>
+    </header>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Score</th>
+            </tr>
+            {% for zapas in rozpis_zapasu %}
+            <tr>
+                <td>{{ zapas.team1 }}</td>
+                <td>{{ zapas.team2 }}</td>
+                <td>
+                    {% if zapas.score1 is not None and zapas.score2 is not None %}
+                        {{ zapas.score1 }} : {{ zapas.score2 }}
+                    {% else %}
+                        None : None
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'home' %}">Zpět na stránku Home</a>
+    </div>
+    <footer>
+        <p>Rozpis výsledků &copy; 2025</p>
+    </footer>
+</body>
+</html>

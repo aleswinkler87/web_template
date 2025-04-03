@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}About - My Website{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #0078D7;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #0078D7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        a:hover {
+            background-color: #0053a6;
+        }
+    </style>
+
+    <div class="container">
+        <h1>About Us</h1>
+        <p>
+            Welcome to the About page! Here, you can learn more about our mission, values, and the team 
+            behind this project. My name is Ales, I am the author of this webpage. This webpage was created
+            as the final project of course Python 2024/25. 
+        </p>
+    </div>
+{% endblock %}
